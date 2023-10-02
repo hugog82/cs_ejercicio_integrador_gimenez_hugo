@@ -1,9 +1,9 @@
-﻿namespace WinFormsApp1
+﻿namespace MiCalculadora
 {
-    partial class FrmCalculadora
+    partial class FrmCalculadora        /// <summary>
+                                        ///  Required designer variable.
+
     {
-        /// <summary>
-        ///  Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
@@ -81,6 +81,7 @@
             txtPrimerOperador.PlaceholderText = "Primer Operador";
             txtPrimerOperador.Size = new Size(187, 23);
             txtPrimerOperador.TabIndex = 3;
+            txtPrimerOperador.TextChanged += txtPrimerOperador_TextChanged;
             // 
             // txtSegundoOperador
             // 
@@ -89,6 +90,7 @@
             txtSegundoOperador.PlaceholderText = "Segundo Operador";
             txtSegundoOperador.Size = new Size(184, 23);
             txtSegundoOperador.TabIndex = 4;
+            txtSegundoOperador.TextChanged += txtSegundoOperador_TextChanged;
             // 
             // cmbOperacion
             // 
@@ -110,6 +112,7 @@
             rdbDecimal.TabStop = true;
             rdbDecimal.Text = "Decimal";
             rdbDecimal.UseVisualStyleBackColor = true;
+            rdbDecimal.CheckedChanged += rdbDecimal_CheckedChanged;
             // 
             // rdbBinario
             // 
@@ -121,6 +124,7 @@
             rdbBinario.TabStop = true;
             rdbBinario.Text = "Binario";
             rdbBinario.UseVisualStyleBackColor = true;
+            rdbBinario.CheckedChanged += rdbBinario_CheckedChanged;
             // 
             // grpSistema
             // 

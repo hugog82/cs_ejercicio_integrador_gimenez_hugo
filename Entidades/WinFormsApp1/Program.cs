@@ -1,4 +1,4 @@
-namespace WinFormsApp1
+namespace MiCalculadora
 {
     internal static class Program
     {

@@ -142,14 +142,14 @@
         {
             return !(sistema == numeracion);
         }
-        public static bool operator == (Numeracion n1, Numeracion n2)
-        {
-            return n1.valorNumerico == n2.valorNumerico && n1.sistema == n2.sistema;
-        }
-        public static bool operator != (Numeracion n1, Numeracion n2)
-        {
-            return n1.valorNumerico != n2.valorNumerico || n1.sistema != n2.sistema;
-        }
+        //public static bool operator == (Numeracion n1, Numeracion n2)
+        //{
+        //    return n1.valorNumerico == n2.valorNumerico && n1.sistema == n2.sistema;
+        //}
+        //public static bool operator != (Numeracion n1, Numeracion n2)
+        //{
+        //    return n1.valorNumerico != n2.valorNumerico || n1.sistema != n2.sistema;
+        //}
         public static Numeracion operator + (Numeracion n1, Numeracion n2)
         {
             if (n1.sistema == ESistema.Decimal && n2.sistema  == ESistema.Decimal)
@@ -205,23 +205,6 @@
                 return new Numeracion(0, (double)ESistema.Decimal);
             }
         }
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj is Numeracion other)
-        //    {
-        //        return sistema == other.sistema && valorNumerico == other.valorNumerico;
-        //    }
-        //    return false;
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    return HashCode.Combine(sistema, valorNumerico);
-        //}
-
-
-
-
-
+        
     }
 }

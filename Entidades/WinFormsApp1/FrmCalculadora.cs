@@ -1,7 +1,14 @@
-namespace WinFormsApp1
+using Entidades;
+
+namespace MiCalculadora
 {
     public partial class FrmCalculadora : Form
     {
+        private Numeracion primerOperando;
+        private Numeracion segundoOperando;
+        private Numeracion resultado;
+        private ESistema sistema;
+
         public FrmCalculadora()
         {
             InitializeComponent();
@@ -9,23 +16,81 @@ namespace WinFormsApp1
 
         private void FrmCalculadora_Load(object sender, EventArgs e)
         {
-            this.cmbOperacion.Items.Add("+");
-            this.cmbOperacion.Items.Add("-");
-            this.cmbOperacion.Items.Add("*");
-            this.cmbOperacion.Items.Add("/");
-            this.cmbOperacion.SelectedItem = "+";
+            this.cmbOperacion.Items.Add("");
+            this.cmbOperacion.Items.Add('+');
+            this.cmbOperacion.Items.Add('-');
+            this.cmbOperacion.Items.Add('*');
+            this.cmbOperacion.Items.Add('/');
+
+            sistema = ESistema.Decimal;//Inicializo con el sistema Decimal por defecto
+            rdbDecimal.Checked = true;//Inicializo con el roundbox en Decimal por defecto
+
         }
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
+            if (primerOperando != null && segundoOperando != null)
+            {
+                Operacion operacion = new Operacion(primerOperando, segundoOperando);
 
+                Numeracion resultado = operacion.Operar('+');
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
+            txtPrimerOperador.Clear();
+            txtSegundoOperador.Clear();
+            //lblResultado.Text = "";
+            primerOperando = null;
+            segundoOperando = null;
+            resultado = null;
 
+            //resultado = null;
         }
 
+
+        private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            setResultado();
+        }
+
+        private void lblResultado_Click(object sender, EventArgs e)
+        {
+            setResultado();
+        }
+        private void rdbDecimal_CheckedChanged(object sender, EventArgs e)
+        {
+            sistema = ESistema.Decimal;
+            //setResultado();
+        }
+        private void rdbBinario_CheckedChanged(object sender, EventArgs e)
+        {
+            sistema = ESistema.Binario;
+            //setResultado();
+        }
+
+        private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPrimerOperador.Text is not null)
+            {
+                primerOperando = new Numeracion(sistema, txtPrimerOperador.Text);
+            }
+        }
+        private void txtSegundoOperador_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSegundoOperador.Text is not null)
+            {
+                segundoOperando = new Numeracion(sistema, txtSegundoOperador.Text);
+            }
+        }
+        private void setResultado()
+        {
+            if (resultado != null)
+            {
+                lblResultado.Text = resultado.ToString();
+            }
+        }
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -38,18 +103,8 @@ namespace WinFormsApp1
             {
                 e.Cancel = true;
             }
-
         }
 
-        private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblResultado_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }
