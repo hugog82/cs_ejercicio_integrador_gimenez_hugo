@@ -8,6 +8,7 @@ namespace MiCalculadora
         private Numeracion segundoOperando;
         private Numeracion resultado;
         private ESistema sistema;
+        char operador;
 
         public FrmCalculadora()
         {
@@ -29,12 +30,7 @@ namespace MiCalculadora
 
         private void btnOperar_Click(object sender, EventArgs e)
         {
-            if (primerOperando != null && segundoOperando != null)
-            {
-                Operacion operacion = new Operacion(primerOperando, segundoOperando);
-
-                Numeracion resultado = operacion.Operar('+');
-            }
+            setResultado();
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -46,28 +42,27 @@ namespace MiCalculadora
             segundoOperando = null;
             resultado = null;
 
-            //resultado = null;
         }
 
 
         private void cmbOperacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            setResultado();
+            operador = (char)cmbOperacion.SelectedIndex;
         }
 
         private void lblResultado_Click(object sender, EventArgs e)
         {
-            setResultado();
+            
         }
         private void rdbDecimal_CheckedChanged(object sender, EventArgs e)
         {
             sistema = ESistema.Decimal;
-            //setResultado();
+            setResultado();
         }
         private void rdbBinario_CheckedChanged(object sender, EventArgs e)
         {
             sistema = ESistema.Binario;
-            //setResultado();
+            setResultado();
         }
 
         private void txtPrimerOperador_TextChanged(object sender, EventArgs e)
@@ -86,6 +81,12 @@ namespace MiCalculadora
         }
         private void setResultado()
         {
+            if (primerOperando != null && segundoOperando != null)
+            {
+                Operacion operacion = new Operacion(primerOperando, segundoOperando);
+
+                Numeracion resultado = operacion.Operar(operador);
+            }
             if (resultado != null)
             {
                 lblResultado.Text = resultado.ToString();
